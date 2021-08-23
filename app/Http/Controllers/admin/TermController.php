@@ -27,9 +27,7 @@ class TermController extends Controller
     {
 
         Term::updateOrCreate(
-            [
-                'id' => $request->id
-            ],
+            ['id' => $request->id],
             [
                 'obj' => $request->obj,
                 'obj_id' => $request->obj_id,

@@ -24,6 +24,7 @@
                                     <th width="10">#</th>
                                     <th>Otel Adı</th>
                                     <th>Dönemler</th>
+                                    <th>Odalar</th>
                                     <th width="115"></th>
                                 </tr>
                             </thead>
@@ -41,6 +42,16 @@
                                             @forelse ($term_[$hotel->id] as $term)
                                                 <a href="{{ route('admin.term.edit', ['obj' => 'HOTEL', 'obj_id' => $hotel->id, 'term_id' => $term->id]) }}"
                                                     class="btn btn-outline-secondary btn-sm j-modal">{{ $term->showDates() }}</a>
+                                            @empty
+
+                                            @endforelse
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.room.edit', ['hotel_id' => $hotel->id]) }}"
+                                                class="btn btn-sm btn-outline-primary">Ekle</a>
+                                            @forelse ($hotel->getRoom as $room)
+                                                <a href="{{ route('admin.room.edit', ['hotel_id' => $hotel->id, 'room_id' => $room->id]) }}"
+                                                    class="btn btn-outline-secondary btn-sm">{{ $room->name }}</a>
                                             @empty
 
                                             @endforelse

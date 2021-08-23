@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('panel/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <link rel="stylesheet" href="{{ asset('panel/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('panel/plugins/colorbox/colorbox.css') }}">
+    <link rel="stylesheet" href="{{ asset('panel/plugins/datetimepicker/jquery.datetimepicker.css') }}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -59,9 +60,9 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.1.0
+                <b>Version</b> 1.0.0
             </div>
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
+            <strong>Copyright &copy; 2021 <a href="https://kodluyoruz.org">Laravel Bootcamp</a>.</strong> All rights
             reserved.
         </footer>
 
@@ -70,9 +71,12 @@
     </div>
 
     <script src="{{ asset('panel/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('panel/plugins/jquery-form/jquery.form.min.js') }}"></script>
     <script src="{{ asset('panel/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('panel/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <script src="{{ asset('panel/plugins/colorbox/jquery.colorbox.min.js') }}"></script>
+    <script src="{{ asset('panel/plugins/datetimepicker/jquery.datetimepicker.full.min.js') }}"></script>
+    <script src="{{ asset('panel/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 
     <script src="{{ asset('panel/plugins/moment/moment.min.js') }}"></script>
     <script src="{{ asset('panel/plugins/inputmask/jquery.inputmask.min.js') }}"></script>

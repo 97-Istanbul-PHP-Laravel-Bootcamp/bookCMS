@@ -8,6 +8,7 @@ use App\Models\Location;
 use App\Models\Partner;
 use App\Models\Term;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HotelController extends Controller
 {
@@ -18,9 +19,9 @@ class HotelController extends Controller
             'hotelCursor' => Hotel::where('status', '<>', 't')->paginate(10),
         ];
 
-        $termCursor = Term::where('status' , 'a')->where('obj', 'HOTEL')->get();
+        $termCursor = Term::where('status', 'a')->where('obj', 'HOTEL')->get();
 
-        foreach($termCursor as $term){
+        foreach ($termCursor as $term) {
             $data_['term_'][$term->obj_id][] = $term;
         }
         return view('admin.hotel.index', $data_);
@@ -45,6 +46,17 @@ class HotelController extends Controller
 
     public function save(Request $request)
     {
+
+
+        if ($request->hasFile('gallery_')) {
+            foreach ($request->file('gallery_') as $file) {
+                if ($file->isValid()) {
+                    $gallery_[]= $file->getClientOriginalName();
+                    $file->storeAs('/public/img', $file->getClientOriginalName());
+                }
+            }
+        }
+
         $hotel = Hotel::updateOrCreate(
             ['id' => $request->id],
             [
@@ -54,7 +66,8 @@ class HotelController extends Controller
                 'info_s' => $request->info_s,
                 'star' => $request->star,
                 'spec_x' => $request->spec_x,
-                'board_x' => $request->board_x
+                'board_x' => $request->board_x,
+                'photo_s' => ['gallery_' => $gallery_]
             ]
         );
 

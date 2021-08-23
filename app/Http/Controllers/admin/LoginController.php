@@ -12,7 +12,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             return redirect()->route('admin.index');
         }
 
@@ -26,7 +26,10 @@ class LoginController extends Controller
             'status' => 'a'
         ])->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        $key = "KODLUYORUZ";
+        $pass = $key.$request->password;
+           
+        if (!$user || !Hash::check($pass, $user->password)) {
             return redirect()->route('admin.login-page')->withErrors('notfound', 'Kullanıcı bulunamadı.');
         }
 
@@ -42,8 +45,42 @@ class LoginController extends Controller
     }
 
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('admin.login-page');
+    }
+
+
+    public function register()
+    {
+
+        if (Auth::check()) {
+            return redirect()->route('admin.index');
+        }
+
+        return view('admin.register');
+    }
+
+    public function registerSave(Request $request)
+    {
+
+        $key ="KODLUYORUZ";
+        $pass = $key.$request->password;
+
+        $data_ = [
+            'fname' => $request->fname,
+            'lname' => $request->lname,
+            'uname' => $request->uname,
+            'email' => $request->email,
+            'mpno' => $request->mpno,
+            'password' => Hash::make($pass),
+            'auth_x' => "|super|"
+        ];
+
+
+        User::create($data_);
+
+        return view('admin.login');
     }
 }

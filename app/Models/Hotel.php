@@ -13,9 +13,19 @@ class Hotel extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'info_s' => 'array'
+        'info_s' => 'array',
+        'photo_s' => 'array'
     ];
 
+
+    public function location()
+    {
+        return $this->hasOne(Location::class, 'id', 'location_id');
+    }
+    public function getRoom()
+    {
+        return $this->hasMany(Room::class, 'hotel_id', 'id');
+    }
 
     public static function getSpecR($obj = NULL, $prop = 'name')
     {

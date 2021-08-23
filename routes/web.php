@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\HbookController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\PartnerController;
 use App\Http\Controllers\admin\ZoneController;
 use App\Http\Controllers\admin\LocationController;
 use App\Http\Controllers\admin\HotelController;
+use App\Http\Controllers\admin\RoomController;
 use App\Http\Controllers\admin\TermController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->name('admin')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('.login-page');
     Route::post('/login', [LoginController::class, 'login'])->name('.login');
+    Route::get('/register', [LoginController::class, 'register'])->name('.register');
+    Route::post('/register', [LoginController::class, 'registerSave'])->name('.register.save');
 
     // Need Auth
     Route::middleware(['auth'])->group(function () {
@@ -47,6 +51,19 @@ Route::prefix('admin')->name('admin')->group(function () {
         Route::get('/term/edit', [TermController::class, 'edit'])->name('.term.edit');
         Route::post('/term/save', [TermController::class, 'save'])->name('.term.save');
         Route::get('/term/delete', [TermController::class, 'delete'])->name('.term.delete');
+
+        // Room
+        Route::get('/room/edit', [RoomController::class, 'edit'])->name('.room.edit');
+        Route::get('/room/delete', [RoomController::class, 'delete'])->name('.room.delete');
+        Route::post('/room/save', [RoomController::class, 'save'])->name('.room.save');
+        Route::get('/room/hfee', [RoomController::class, 'hfee'])->name('.room.hfee');
+        Route::post('/room/hfee', [RoomController::class, 'hfeeSave'])->name('.room.hfee');
+
+        // Hbook
+        Route::get('/hbook/new', [HbookController::class, 'new'])->name('.hbook.new');
+        Route::post('/hbook/hara', [HbookController::class, 'hara'])->name('.hbook.hara');
+        Route::post('/hbook/info' , [HbookController::class, 'info'])->name('.hbook.info');
+        Route::post('/hbook/save' , [HbookController::class, 'save'])->name('.hbook.save');
     });
 });
 
